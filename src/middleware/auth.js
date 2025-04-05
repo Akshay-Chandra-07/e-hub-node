@@ -9,7 +9,7 @@ const authMiddleware = (req, res, next) => {
     });
   }
 
-  const payload = verifyToken(token, publicKey);
+  const payload = verifyToken(token);
 
   if (!payload) {
     return res.status(401).json({

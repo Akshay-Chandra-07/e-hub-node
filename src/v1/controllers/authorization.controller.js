@@ -63,7 +63,7 @@ class AuthorizationController {
             user[0].password
           );
           if (isValidPassword) {
-            data.token = await createToken(user[0].id);
+            data.token = await createToken({ user_id: user[0].id });
             message = "Login successful";
             success = true;
           } else {

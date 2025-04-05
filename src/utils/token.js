@@ -7,6 +7,7 @@ const createToken = (payload) => {
     const privateKey = process.env.PRIVATE_KEY;
     const token = jwt.sign(payload, privateKey, {
       expiresIn: "1h",
+      algorithm: 'RS256'
     });
 
     // Encrypt the JWT token
@@ -21,16 +22,11 @@ const verifyToken = (encryptedToken) => {
   try {
     const publicKey = process.env.PUBLIC_KEY;
     const token = CryptoUtils.decrypt(encryptedToken);
-    jwt.verify(token, publicKey, async (err, decoded) => {
-      if (err) {
-        throw new Error("Token verification failed: " + err.message);
-      } else {
-        return decoded;
-      }
-    });
+    const decoded = jwt.verify(token, publicKey,{ algorithms: ['RS256'] });
+    return decoded;
   } catch (error) {
     console.error("Token verification failed:", error);
-    return false;
+    throw new Error("Token verification failed: " + error.message);
   }
 };
 

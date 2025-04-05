@@ -24,6 +24,7 @@ class Database {
         throw new Error("Database name not found");
       }
       req.knex = this.getKnexInstance(req.db);
+      console.log("DB CONNECTED!")
       next();
     } catch (error) {
       console.error("Database connection error:", error);
