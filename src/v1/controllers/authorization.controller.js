@@ -1,6 +1,6 @@
 const bcryptService = require("../../utils/bcrypt");
 const authorizationService = require("../services/authorization.service");
-const { createToken } = require("../utils/token");
+const { createToken } = require("../../utils/token");
 const userLoginSchema = require("../validations/userLoginValidation");
 const userRegistrationSchema = require("../validations/userRegistrationValidation");
 
