@@ -18,7 +18,7 @@ app.use(database.mysqlConnectionMiddleware);
 
 //routes
 app.use("/v1/auth", authorizationRouter);
-app.use("/v1",router)
+app.use("/v1", router);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
