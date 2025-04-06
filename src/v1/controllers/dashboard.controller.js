@@ -1,15 +1,27 @@
+const ContentFactory = require("../factories/ContentFactory");
+
 class DashboardController {
   getBooks = (req, res) => {
-    console.log("Hello from books");
+    let data = {};
+    let message;
+    let success;
     try {
-      let data = {};
-      let message;
-      let success;
+      // Example usage of the factory design pattern
+      const book = ContentFactory.createContent("book", {
+        title: "Factory design pattern",
+        author: "Ganesh",
+        description: "A classic book on design patterns",
+        publisher: "Akrivia",
+        pages: 416,
+      });
 
-      message = " Hello from books";
+      data = {
+        book: book.display(),
+      };
+      message = "Successfully created educational content";
       success = true;
     } catch (error) {
-      message = "Error";
+      message = error.message || "Error creating educational content";
       success = false;
     }
 
