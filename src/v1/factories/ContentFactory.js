@@ -31,18 +31,49 @@ class Book extends Content {
   }
 }
 
+class Video extends Content {
+  constructor(title, author, description, link, length) {
+    super(title, author, description);
+    this.link = link;
+    this.length = length;
+  }
+
+  display() {
+    return {
+      ...super.display(),
+      type: "video",
+      author: this.author,
+      description: this.description
+    }
+  }
+}
+
 class ContentFactory {
   createContent(type, data) {
-    if (type == "book") {
-      return new Book(
-        data.title,
-        data.author,
-        data.description,
-        data.publisher,
-        data.pages
-      );
+    if (!type || !data) {
+      throw new Error('Type and data are required');
     }
-    throw new Error("Invalid content type");
+
+    switch(type) {
+      case "book":
+        return new Book(
+          data.title,
+          data.author,
+          data.description,
+          data.publisher,
+          data.pages
+        );
+      case "video":
+        return new Video(
+          data.title,
+          data.author,
+          data.description,
+          data.link,
+          data.length
+        );
+      default:
+        throw new Error(`Invalid content type: ${type}`);
+    }
   }
 }
 
